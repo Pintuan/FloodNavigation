@@ -7,7 +7,11 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 1. Install dependencies
 
    ```bash
-   npm install
+   npm install 
+   npm install expo-location
+   npm install react-native-maps
+   npm install axios
+   npm install react-native-dotenv
    ```
 
 2. Start the app
