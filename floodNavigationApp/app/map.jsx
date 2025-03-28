@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Alert } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';
 import * as Location from 'expo-location';
+import {GOOGLE_MAP_API_KEY, DOMAIN_IP, API_FOLDER_NAME} from "@env";
 import axios from 'axios';
 
 const getDistance = (lat1, lon1, lat2, lon2) => {
@@ -44,7 +45,7 @@ export default function App() {
   useEffect(() => {
     const fetchWaypoints = async () => {
       try {
-        const response = await axios.post('http://192.168.100.2/floodNavigation/getSensor.php');
+        const response = await axios.post( DOMAIN_IP + API_FOLDER_NAME + '/getSensor.php');
         const formatted = response.data.data.map((wp) => ({
           latitude: dmsToDecimal(wp.sensor_coord_x),
           longitude:dmsToDecimal(wp.sensor_coord_y),
@@ -72,7 +73,7 @@ export default function App() {
 
   const fetchRoute = async (origin, destination, waypoints = []) => {
     try {
-      const apiKey = 'AIzaSyBSbpX9Opeq1E02lIxxcaK6hVQErl-BKAg';
+      const apiKey = GOOGLE_MAP_API_KEY;
       const originStr = `${origin.latitude},${origin.longitude}`;
       const destinationStr = `${destination.latitude},${destination.longitude}`;
       const waypointsStr = waypoints.length > 0
